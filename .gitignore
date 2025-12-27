@@ -1,2 +1,8 @@
 #Ignore environment file
 .env
+app.py
+scanner.py
+authorize.py
+requirements.py
+start.sh
+holidays.json
