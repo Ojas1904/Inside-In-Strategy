@@ -88,36 +88,43 @@ Waiting for scan...
 </div>
 
 <script>
+    const API_BASE = "https://inside-in-strategy-backend.onrender.com";
+
     document.addEventListener("DOMContentLoaded", () => {
-    const today = new Date().toISOString().split("T")[0];
-    document.getElementById("dateInput").setAttribute("max", today);
-});
-function runScan() {
-    const date = document.getElementById("dateInput").value;
-    const logsDiv = document.getElementById("logs");
-
-    if (!date) {
-        logsDiv.textContent = "⚠️ Please select a date first.";
-        return;
-    }
-
-    logsDiv.textContent = "⏳ Running scan...\n";
-
-    fetch("/scan", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ date })
-    })
-    .then(res => res.json())
-    .then(data => {
-    if (data.logs) {
-        logsDiv.textContent = data.logs.join("\n");
-    } else {
-        logsDiv.textContent = "No response from server.";
-    }
+        const today = new Date().toISOString().split("T")[0];
+        document.getElementById("dateInput").setAttribute("max", today);
     });
-}
+
+    function runScan() {
+        const date = document.getElementById("dateInput").value;
+        const logsDiv = document.getElementById("logs");
+
+        if (!date) {
+            logsDiv.textContent = "⚠️ Please select a date first.";
+            return;
+        }
+
+        logsDiv.textContent = "⏳ Running scan...\n";
+
+        fetch(`${API_BASE}/scan`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ date })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.logs) {
+                logsDiv.textContent = data.logs.join("\n");
+            } else {
+                logsDiv.textContent = "No response from server.";
+            }
+        })
+        .catch(err => {
+            logsDiv.textContent = "❌ Error connecting to backend.\n" + err;
+        });
+    }
 </script>
+
 
 </body>
 </html>
