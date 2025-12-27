@@ -3,8 +3,8 @@
 from kiteconnect import KiteConnect
 import webbrowser
 
-API_KEY = "API_KEY"
-API_SECRET = "API_SECRET_KEY"
+API_KEY = "process.env.API_KEY"
+API_SECRET = "process.env.API_SECRET_KEY"
 
 kite = KiteConnect(api_key=API_KEY)
 

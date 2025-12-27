@@ -12,8 +12,8 @@ def log(msg, logs):
     logs.append(msg)    # also stores for frontend
 
 
-API_KEY = "API_KEY"
-ACCESS_TOKEN = "ACCESS_TOKEN"
+API_KEY = "process.env.API_KEY"
+ACCESS_TOKEN = "process.env.ACCESS_TOKEN"
 
 BASE_URL = "https://api.kite.trade/instruments/historical"
 HEADERS = {
